@@ -1,6 +1,7 @@
 import '@/app/globals.css'
 import { Inter } from 'next/font/google'
 import Header from '@/components/header'
+import { Toaster } from 'sonner'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,6 +19,7 @@ export default async function RootLayout({ children }) {
         <main className="px-10">
           {children}
         </main>
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   )

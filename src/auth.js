@@ -9,7 +9,7 @@ export const options = {
     session: { strategy: 'jwt' },
     adapter: PrismaAdapter(prisma),
     pages: {
-        signIn: '/auth/login',
+        // signIn: '/auth/login',
         signOut: '/auth/logout',
         error: '/auth/error'
     },

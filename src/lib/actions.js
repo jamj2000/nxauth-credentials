@@ -31,8 +31,6 @@ export async function register(prevState, formData) {
             password: hashedPassword
         }
     })
-
-    return { success: "Registro correcto" }
 }
 
 
@@ -49,7 +47,10 @@ export async function login(prevState, formData) {
     })
 
     if (!user) {
-        return { error: 'Usuario no registrado.' }
+        return {
+            error: 'Usuario no registrado.',
+            fields: Object.fromEntries(formData.entries())
+        }
     }
 
     // Comparamos password 
@@ -58,14 +59,16 @@ export async function login(prevState, formData) {
     if (user && matchPassword) {  // && user.emailVerified
         if (user.role === 'ADMIN')
             await signIn('credentials', { email, password, redirectTo: '/admin' })
-        else 
+        else
             await signIn('credentials', { email, password, redirectTo: '/dashboard' })
-        return { success: "Inicio de sesión correcto" }
     } else {
-        return { error: 'Credenciales incorrectas.' }
+        return {
+            error: 'Credenciales incorrectas.',
+            fields: Object.fromEntries(formData.entries())
+        }
     }
 }
 
-export async function logout () {
-    await signOut({ redirectTo: '/about' });
+export async function logout() {
+    await signOut({ redirectTo: '/' });
 }

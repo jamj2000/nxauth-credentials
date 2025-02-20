@@ -1,4 +1,8 @@
+import { auth } from '@/auth';
 import { LoginForm } from '@/components/login-form'
+import { RegisterForm } from '@/components/register-form';
+import { redirect } from 'next/navigation';
+import { CirclePlus, Play } from 'lucide-react';
 
 // https://next-auth.js.org/configuration/pages#sign-in-page
 const errors = new Map();
@@ -17,12 +21,44 @@ errors.set('Default', "No se puede iniciar sesión.");
 async function PaginaLogin(props) {
   const searchParams = await props.searchParams;
   const { error } = searchParams
+  const sesion = await auth()
+
+  if (sesion) redirect('/dashboard')
 
   return (
-    <> 
-      <LoginForm />
+    <div className="mt-4 border-2 border-slate-400 rounded-md mx-auto w-fit p-8 flex flex-col gap-4">
+      {/* En Tailwind, la clase peer funciona sólo entre hermanos (siblings) */}
+      {/* https://tailwindcss.com/docs/hover-focus-and-other-states#differentiating-peers */}
+    
+      <input
+        id="signup"
+        type="radio" name="sign"
+        className="hidden peer/register"
+        defaultChecked={true} />
+      <label
+        htmlFor="signup"
+        title="Registro"
+        className='self-end text-slate-300 peer-checked/register:text-black'>
+        <CirclePlus />
+      </label>
+
+      <input
+        id="signin"
+        title="Iniciar sesión"
+        type="radio" name="sign"
+        className="hidden peer/login"
+        defaultChecked={true} />
+      <label
+        htmlFor="signin"
+        title="Iniciar sesión"
+        className='self-end text-slate-300 peer-checked/login:text-black'>
+        <Play />
+      </label>
+
+      <RegisterForm className="hidden peer-checked/register:block" />
+      <LoginForm className="hidden peer-checked/login:block" />
       {error && <p>{errors.get(error)}</p>}
-    </>
+    </div>
   )
 }
 

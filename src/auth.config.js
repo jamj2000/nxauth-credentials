@@ -1,10 +1,12 @@
 import Credentials from "@auth/core/providers/credentials";
+import Resend from "@auth/core/providers/resend";
 import bcrypt from "bcryptjs";
 import { getUserByEmail } from "@/lib/data";
 // import prisma from "@/lib/prisma";  // MAL: No admitido en Vercel Edge
 
 export default {
   providers: [
+    Resend,
     Credentials({
       async authorize(credentials) {
                 // MAL: No admitido en Vercel Edge

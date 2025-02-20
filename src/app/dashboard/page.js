@@ -13,7 +13,7 @@ async function PaginaDashboard() {
                 <img src={session?.user.image}></img>
             </>)
     else
-        return <h1> No has iniciado sessión</h1>
+        return <h2 className="text-2xl text-red-400 font-bold"> No has iniciado sessión</h2>
 }
 
 export default PaginaDashboard
