@@ -25,7 +25,7 @@ async function PaginaLogin({searchParams}) {
   if (sesion) redirect('/dashboard')
 
   return (
-    <div className="mt-4 border-2 border-slate-400 rounded-md mx-auto w-fit p-8 flex flex-col gap-4">
+    <div className="mt-4 border-2 border-slate-400 rounded-md mx-auto w-fit p-8 flex flex-col gap-2">
       {/* En Tailwind, la clase peer funciona sólo entre hermanos (siblings) */}
       {/* https://tailwindcss.com/docs/hover-focus-and-other-states#differentiating-peers */}
     

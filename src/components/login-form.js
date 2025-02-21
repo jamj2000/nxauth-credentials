@@ -16,6 +16,7 @@ export function LoginForm({ className }) {
                         defaultValue={state.fields?.email || ''}
                         placeholder="john.doe@example.com"
                         className='peer block'
+                        required
                     />
                     <p className="invisible peer-invalid:visible text-red-300">
                         Por favor, introduce un email válido.
