@@ -1,5 +1,5 @@
 'use client'
-import { useActionState, useEffect } from 'react';
+import { useActionState } from 'react';
 import { register } from '@/lib/actions'
 
 

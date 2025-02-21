@@ -2,6 +2,7 @@
 import bcrypt from 'bcryptjs'
 import prisma from '@/lib/prisma'
 import { signIn, signOut } from '@/auth';
+import { redirect } from 'next/navigation';
 
 
 export async function register(prevState, formData) {
@@ -34,6 +35,8 @@ export async function register(prevState, formData) {
             password: hashedPassword
         }
     })
+
+    redirect('/auth/login')
 }
 
 
