@@ -4,11 +4,19 @@ export default async function Home() {
   return (
     <>
       <h1 className="text-3xl font-bold">Página principal</h1>
-      <ul>
-        <li><Link href="/admin">Panel de admin</Link></li>
-        <li><Link href="/dashboard">Dashboard del usuario</Link></li>
-        <li><Link href="/about">About</Link></li>
-      </ul>
+
+      <div className="flex flex-col items-start">
+        <Link href="/admin" className="text-blue-700">
+          Panel de admin
+        </Link>
+        <Link href="/dashboard" className="text-blue-700">
+          Dashboard del usuario
+        </Link>
+        <Link href="/about" className="text-blue-700">
+          About
+        </Link>
+      </div>
+
     </>
   )
 }

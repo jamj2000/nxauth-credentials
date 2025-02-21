@@ -18,9 +18,8 @@ errors.set('SessionRequired', "Error al iniciar sesión. Verifique que los detal
 errors.set('Default', "No se puede iniciar sesión.");
 
 
-async function PaginaLogin(props) {
-  const searchParams = await props.searchParams;
-  const { error } = searchParams
+async function PaginaLogin({searchParams}) {
+  const { error } = await searchParams
   const sesion = await auth()
 
   if (sesion) redirect('/dashboard')

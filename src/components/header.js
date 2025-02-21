@@ -16,6 +16,7 @@ async function Header() {
                     && <Link href="/admin">Admin panel</Link>
                 }
                 <Link href="/dashboard">Dashboard</Link>
+                <Link href="/about">About</Link>
             </div>
             <nav className='flex gap-4'>
                 {session

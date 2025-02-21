@@ -1,26 +1,32 @@
 import NextAuth from "next-auth"
-import authConfig from "@/auth.config"
+import Credentials from "@auth/core/providers/credentials";
+import { getUserById, getUserByEmail } from "@/lib/data";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma"
-import { getUserById } from "@/lib/data"
+
+
+
+const credentialsConfig = {
+    // LOGIN ACTION -> AUTHORIZE -> JWT -> SESSION
+    async authorize(credentials) {
+        const user = await getUserByEmail(credentials.email)
+        return user  
+    },
+}
 
 
 export const options = {
+    providers: [
+        Credentials(credentialsConfig),
+    ],
     session: { strategy: 'jwt' },
     adapter: PrismaAdapter(prisma),
     pages: {
-        // signIn: '/auth/login',
+        signIn: '/auth/login',
         signOut: '/auth/logout',
         error: '/auth/error'
     },
     callbacks: {
-        async session({ session, token }) {
-            // console.log(session, user);
-            session.user.id = token?.sub
-            session.user.role = token?.role
-            return session
-        },
-
         async jwt({ token }) {
             if (!token.sub) return token;
 
@@ -29,6 +35,12 @@ export const options = {
 
             token.role = user?.role
             return token
+        },
+
+        async session({ session, token }) {
+            session.user.id = token?.sub
+            session.user.role = token?.role
+            return session
         }
     }
 }
@@ -39,7 +51,7 @@ export const {
     auth,
     signIn,
     signOut
-} = NextAuth({ ...options, ...authConfig})
+} = NextAuth( options )
 
 
 

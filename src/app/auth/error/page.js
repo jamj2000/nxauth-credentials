@@ -7,9 +7,8 @@ errors.set('Verification', "El token ha caducado o ya ha sido utilizado. Relacio
 errors.set('Default', "Ocurrió un error inesperado.");
 
 
-async function PaginaError(props) {
-  const searchParams = await props.searchParams;
-  const { error } = searchParams;
+async function PaginaError({searchParams}) {
+  const { error } = await searchParams;
 
   return (
     <>
