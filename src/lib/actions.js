@@ -17,7 +17,10 @@ export async function register(prevState, formData) {
     })
 
     if (user) {
-        return { error: 'El email ya está registrado' }
+        return {
+            error: 'El email ya está registrado',
+            fields: Object.fromEntries(formData.entries())
+        }
     }
 
     // Encriptamos password 
