@@ -21,8 +21,8 @@ npm  install  next-auth@beta
 ### Instalar soporte de Base Datos
 
 ```sh
-npm install prisma -D
-npm install @prisma/client
+npm install prisma@6 -D
+npm install @prisma/client@6
 
 npx prisma init  # para crear archivo prisma/schema.prisma
 ```
@@ -58,12 +58,6 @@ model User {
 }
 ```
 
-Ejecutamos
-
-```sh
-npx  prisma  generate   # para generar cliente de prisma
-npx  prisma  db  push   # para realizar migración (crear tabla)
-```
 
 ### Preparar Base Datos 
 
@@ -86,26 +80,26 @@ Seguir la siguiente documentación:
 
 Solo definimos los modelos `User` y `Account`
 
-En el modelo `User` insertamos campo de password y role:
+En el modelo `User` insertamos campo de password, role y active:
 
 ```prisma
 model User {
     ...
     password  String?
-    role      String?   @default("USER")  // o  ADMIN
+    role          String?   @default("USER") //  ADMIN, USER
+    active        Boolean?  @default(true)   //  true, fase
     ...
 }
 ```
-Declaramos password como opcional puesto que los proveedores OAuth no lo usan.
+Declaramos password, role y active como opcionales puesto que los proveedores OAuth no lo usan.
 
 Y ejecutamos:
 
 ```sh
-npx  prisma  generate
-npx  prisma  db  push
+npx  prisma  db  push   # para realizar migración (crear tablas del esquema de prisma)
 ```
 
-### Hacer sistema de registro
+### Otros paquetes necesarios
 
 ```sh
 npm  install  bcryptjs   # para cifrar contraseñas

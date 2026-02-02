@@ -18,17 +18,17 @@ errors.set('SessionRequired', "Error al iniciar sesión. Verifique que los detal
 errors.set('Default', "No se puede iniciar sesión.");
 
 
-async function PaginaLogin({searchParams}) {
+async function PaginaLogin({ searchParams }) {
   const { error } = await searchParams
   const sesion = await auth()
 
   if (sesion) redirect('/dashboard')
 
   return (
-    <div className="mt-4 border-2 border-slate-400 rounded-md mx-auto w-fit p-8 flex flex-col gap-2">
+    <div className="relative mt-8 mx-auto flex flex-col gap-2 w-[375px]">
       {/* En Tailwind, la clase peer funciona sólo entre hermanos (siblings) */}
       {/* https://tailwindcss.com/docs/hover-focus-and-other-states#differentiating-peers */}
-    
+
       <input
         id="signup"
         type="radio" name="sign"
@@ -37,7 +37,7 @@ async function PaginaLogin({searchParams}) {
       <label
         htmlFor="signup"
         title="Registro"
-        className='self-end text-slate-300 peer-checked/register:text-black'>
+        className='absolute right-0 text-slate-300 peer-checked/register:text-black'>
         <CirclePlus />
       </label>
 
@@ -50,12 +50,16 @@ async function PaginaLogin({searchParams}) {
       <label
         htmlFor="signin"
         title="Iniciar sesión"
-        className='self-end text-slate-300 peer-checked/login:text-black'>
+        className='absolute right-10 text-slate-300 peer-checked/login:text-black'>
         <Play />
       </label>
 
-      <RegisterForm className="hidden peer-checked/register:block" />
-      <LoginForm className="hidden peer-checked/login:block" />
+
+      <RegisterForm className="hidden peer-checked/register:block w-full bg-[snow] mt-10 border-2 border-slate-400 rounded-md mx-auto p-8 " />
+      <LoginForm className="hidden peer-checked/login:block w-full bg-[snow] mt-10 border-2 border-slate-400 rounded-md mx-auto p-8 " />
+
+      {/* <RegisterForm className="hidden peer-checked/register:block" />
+      <LoginForm className="hidden peer-checked/login:block" /> */}
       {error && <p>{errors.get(error)}</p>}
     </div>
   )
